@@ -31,4 +31,26 @@ function fetchIssues () {
       let issueSeverity = document.getElementById('issueSeverityInput').value;
       let issueAssignedTo = document.getElementById('issueAssignedToInput').value;
       let issueStatus = 'Open';
+
+      let issue = {
+          id: issueId,
+          description: issueDesc,
+          severity: issueSeverity,
+          assignedTo: issueAssignedTo,
+          status: issueStatus
+      }
+
+      if (localStorage.getItem('issues') === null) {
+          let issues = [];
+          issues.push(issue);
+          localStorage.setItem('issues', JSON.stringify(issues));
+      } else {
+          let issues = JSON.parse(localStorage.getItem('issues'));
+          issues.push(issue);
+          localStorage.setItem('issues', JSON.stringify(issues));
+      }
+      document.getElementById('issueInputForm').reset();
+
+      fetchIssues();
+      e.preventDefault();
   }
