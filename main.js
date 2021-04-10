@@ -54,3 +54,14 @@ function fetchIssues () {
       fetchIssues();
       e.preventDefault();
   }
+
+  function setStatusClosed() {
+      let issues = JSON.parse(localStorage.getItem('issues'));
+      for (let i = 0; i < issues.length; i++) {
+          if(issues[i].id == id) {
+              issues[i].status = 'Closed';
+          }
+      }
+      localStorage.setItem('issues', JSON.stringify(issues));
+      fetchIssues();
+  }
